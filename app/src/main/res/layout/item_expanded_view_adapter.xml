@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.horizotal.ItemExpandedAdapter"
+    android:layout_height="100dp">
+
+   <RelativeLayout
+       android:layout_width="80dp"
+       android:layout_height="100dp">
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scaleType="center"
+           android:layout_margin="3dp"
+           android:background="@color/purple_200" />
+       <TextView
+           android:id="@+id/tv_pos"
+           android:layout_width="wrap_content"
+           android:layout_marginTop="3dp"
+           android:layout_marginLeft="3dp"
+           android:layout_height="wrap_content"
+           android:text="position"/>
+       <ImageView
+           android:id="@+id/expand_button"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scaleType="center"
+           android:tint="@color/white"
+           android:alpha="0"
+           android:src="@drawable/ic_chevron_right_black_48dp" />
+   </RelativeLayout>
+
+    <com.nqhuydev.expandablelayout.ExpandableLayout
+        android:id="@+id/expandable_layout"
+        app:el_duration="500"
+        app:el_expanded="false"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_demo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+
+    </com.nqhuydev.expandablelayout.ExpandableLayout>
+</LinearLayout>
