@@ -13,45 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.nqhuydev.expandablelayout.util
 
-package com.nqhuydev.expandablelayout.util;
-
-import android.view.animation.Interpolator;
+import android.view.animation.Interpolator
 
 /**
- * An {@link Interpolator} that uses a lookup table to compute an interpolation based on a
+ * An [Interpolator] that uses a lookup table to compute an interpolation based on a
  * given input.
  */
-abstract class LookupTableInterpolator implements Interpolator {
-
-    private final float[] mValues;
-    private final float mStepSize;
-
-    public LookupTableInterpolator(float[] values) {
-        mValues = values;
-        mStepSize = 1f / (mValues.length - 1);
-    }
-
-    @Override
-    public float getInterpolation(float input) {
+abstract class LookupTableInterpolator(private val mValues: FloatArray) : Interpolator {
+    private val mStepSize: Float
+    override fun getInterpolation(input: Float): Float {
         if (input >= 1.0f) {
-            return 1.0f;
+            return 1.0f
         }
         if (input <= 0f) {
-            return 0f;
+            return 0f
         }
 
         // Calculate index - We use min with length - 2 to avoid IndexOutOfBoundsException when
         // we lerp (linearly interpolate) in the return statement
-        int position = Math.min((int) (input * (mValues.length - 1)), mValues.length - 2);
+        val position = Math.min((input * (mValues.size - 1)).toInt(), mValues.size - 2)
 
         // Calculate values to account for small offsets as the lookup table has discrete values
-        float quantized = position * mStepSize;
-        float diff = input - quantized;
-        float weight = diff / mStepSize;
+        val quantized = position * mStepSize
+        val diff = input - quantized
+        val weight = diff / mStepSize
 
         // Linearly interpolate between the table values
-        return mValues[position] + weight * (mValues[position + 1] - mValues[position]);
+        return mValues[position] + weight * (mValues[position + 1] - mValues[position])
     }
 
+    init {
+        mStepSize = 1f / (mValues.size - 1)
+    }
 }

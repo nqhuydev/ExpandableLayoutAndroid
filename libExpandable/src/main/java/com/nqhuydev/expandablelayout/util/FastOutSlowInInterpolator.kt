@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.nqhuydev.expandablelayout.util;
+package com.nqhuydev.expandablelayout.util
 
 /**
- * Interpolator corresponding to {@link android.R.interpolator#fast_out_slow_in}.
+ * Interpolator corresponding to [android.R.interpolator.fast_out_slow_in].
  *
  * Uses a lookup table for the Bezier curve from (0,0) to (1,1) with control points:
  * P0 (0, 0)
@@ -25,13 +24,13 @@ package com.nqhuydev.expandablelayout.util;
  * P2 (0.2, 1.0)
  * P3 (1.0, 1.0)
  */
-public class FastOutSlowInInterpolator extends LookupTableInterpolator {
-
+ class FastOutSlowInInterpolator : LookupTableInterpolator(VALUES) {
     /**
      * Lookup table values sampled with x at regular intervals between 0 and 1 for a total of
      * 201 points.
      */
-    private static final float[] VALUES = new float[] {
+    companion object {
+        private val VALUES = floatArrayOf(
             0.0000f, 0.0001f, 0.0002f, 0.0005f, 0.0009f, 0.0014f, 0.0020f,
             0.0027f, 0.0036f, 0.0046f, 0.0058f, 0.0071f, 0.0085f, 0.0101f,
             0.0118f, 0.0137f, 0.0158f, 0.0180f, 0.0205f, 0.0231f, 0.0259f,
@@ -61,10 +60,7 @@ public class FastOutSlowInInterpolator extends LookupTableInterpolator {
             0.9955f, 0.9960f, 0.9964f, 0.9969f, 0.9973f, 0.9977f, 0.9980f,
             0.9984f, 0.9986f, 0.9989f, 0.9991f, 0.9993f, 0.9995f, 0.9997f,
             0.9998f, 0.9999f, 0.9999f, 1.0000f, 1.0000f
-    };
-
-    public FastOutSlowInInterpolator() {
-        super(VALUES);
+        )
     }
 
 }
