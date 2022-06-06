@@ -24,7 +24,7 @@ package com.nqhuydev.expandablelayout.util
  * P2 (0.2, 1.0)
  * P3 (1.0, 1.0)
  */
- class FastOutSlowInInterpolator : LookupTableInterpolator(VALUES) {
+class FastOutSlowInInterpolator : LookupTableInterpolator(VALUES) {
     /**
      * Lookup table values sampled with x at regular intervals between 0 and 1 for a total of
      * 201 points.

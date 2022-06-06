@@ -16,13 +16,14 @@
 package com.nqhuydev.expandablelayout.util
 
 import android.view.animation.Interpolator
+import kotlin.math.min
 
 /**
  * An [Interpolator] that uses a lookup table to compute an interpolation based on a
  * given input.
  */
 abstract class LookupTableInterpolator(private val mValues: FloatArray) : Interpolator {
-    private val mStepSize: Float
+    private val mStepSize: Float = 1f / (mValues.size - 1)
     override fun getInterpolation(input: Float): Float {
         if (input >= 1.0f) {
             return 1.0f
@@ -33,7 +34,7 @@ abstract class LookupTableInterpolator(private val mValues: FloatArray) : Interp
 
         // Calculate index - We use min with length - 2 to avoid IndexOutOfBoundsException when
         // we lerp (linearly interpolate) in the return statement
-        val position = Math.min((input * (mValues.size - 1)).toInt(), mValues.size - 2)
+        val position = min((input * (mValues.size - 1)).toInt(), mValues.size - 2)
 
         // Calculate values to account for small offsets as the lookup table has discrete values
         val quantized = position * mStepSize
@@ -44,7 +45,4 @@ abstract class LookupTableInterpolator(private val mValues: FloatArray) : Interp
         return mValues[position] + weight * (mValues[position + 1] - mValues[position])
     }
 
-    init {
-        mStepSize = 1f / (mValues.size - 1)
-    }
 }
